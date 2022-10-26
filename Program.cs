@@ -13,14 +13,24 @@ string[,] win = new string[4, 4]
     {"13" , "14", "15", " "  },
 };
 Random random = new Random();
+int x1=0;
+int y1=0;
 
-for (int x = 0; x < 4; x++)
+for (int x = 0; x < 3; x++)
 {
-    for (int y = 0; y < 4; y++)
-    {
-
-        int x1 = random.Next(0, 3);
-        int y1 = random.Next(0, 3);
+    for (int y = 0; y < 3; y++)
+    {   x1=x;
+        y1=y;
+        int z =random.Next(0, 30);
+        if(z%2 == 0)
+        {
+        x1 = x + Convert.ToInt32(random.Next(-1, 2));
+        }
+        if(z%2 != 0)
+        {
+        y1 = y + Convert.ToInt32(random.Next(-1, 2));
+        }
+        
         string value = field[x, y];
         field[x, y] = field[x1, y1];
         field[x1, y1] = value;
@@ -34,10 +44,21 @@ for (int x = 0; x < 4; x++)
     for (int y = 0; y < 4; y++)
     {
         if (field[x, y] == " ")
-        {
+        {   while(field[3, 3]!= " ")
+            {
+            if(x<3)
+            {
             string value = field[x, y];
-            field[x, y] = field[3, 3];
-            field[3, 3] = value;
+            field[x, y] = field[x+1, y];
+            field[x+1, y] = value;
+            }
+            if(y<3 && x==3)
+            {
+            string value = field[x, y];
+            field[x, y] = field[x, y+1];
+            field[x, y+1] = value;
+            }
+            }
             CoordinateX = x;
             CoordinateY = y;
         }
