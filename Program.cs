@@ -37,14 +37,51 @@ for (int q = 0; q < z; q++)
         Down(ref CoordinateY, CoordinateX);
 
     }
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 3; i++)
     {
         Right(CoordinateY, ref CoordinateX);
     }
+   
+    for (int i = 0; i < 2; i++)
+    {
+        UP(ref CoordinateY, CoordinateX);
+
+    }
+  
+    for (int i = 0; i < 3; i++)
+    {
+        Left(CoordinateY, ref CoordinateX);
+
+    }
+   
+    for (int i = 0; i < 1; i++)
+    {
+        Down(ref CoordinateY, CoordinateX);
+
+    }
+    
+    for (int i = 0; i < 3; i++)
+    {
+        Right(CoordinateY, ref CoordinateX);
+    }
+   
+    for (int i = 0; i < 3; i++)
+    {
+        Down(ref CoordinateY, CoordinateX);
+
+    }
+     
+     for (int i = 0; i < 1; i++)
+    {
+        Left(CoordinateY, ref CoordinateX);
+
+    }
+    
+
 }
 
 
-for (int i = 0; i < 10; i++)
+for (int i = 0; i < 20; i++)
 {
     z = random.Next(5);
     int z1 = random.Next(4);
@@ -197,8 +234,6 @@ bool winner = false;
 
 while (winner == false)
 {
-
-
     KeyPressed(Console.ReadKey(), ref field, ref CoordinateX, ref CoordinateY);
     Console.Clear();
     ShowField();
