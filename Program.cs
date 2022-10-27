@@ -1,71 +1,91 @@
-﻿string[,] field = new string[4, 4]             
+﻿string[,] field = new string[4, 4]
 {
     { "1" , "2" , "3" , "4"  },
     { "5" , "6" , "7" , "8"  },
     { "9" , "10", "11", "12" },
     {"13" , "14", "15", " "  },
 };
-string[,] win = new string[4, 4]          
+string[,] win = new string[4, 4]
 {
     { "1" , "2" , "3" , "4"  },
     { "5" , "6" , "7" , "8"  },
     { "9" , "10", "11", "12" },
     {"13" , "14", "15", " "  },
 };
+
+
+int CoordinateX = 3;
+int CoordinateY = 3;
 Random random = new Random();
-int x1=0;
-int y1=0;
+int z = random.Next(4, 50);
 
-for (int x = 0; x < 3; x++)
+for (int q = 0; q < z; q++)
 {
-    for (int y = 0; y < 3; y++)
-    {   x1=x;
-        y1=y;
-        int z =random.Next(0, 30);
-        if(z%2 == 0)
-        {
-        x1 = x + Convert.ToInt32(random.Next(-1, 2));
-        }
-        if(z%2 != 0)
-        {
-        y1 = y + Convert.ToInt32(random.Next(-1, 2));
-        }
-        
-        string value = field[x, y];
-        field[x, y] = field[x1, y1];
-        field[x1, y1] = value;
-    }
-}
-int CoordinateX = 0;
-int CoordinateY = 0;
 
-for (int x = 0; x < 4; x++)
-{
-    for (int y = 0; y < 4; y++)
+    for (int i = 0; i < 3; i++)
     {
-        if (field[x, y] == " ")
-        {   while(field[3, 3]!= " ")
-            {
-            if(x<3)
-            {
-            string value = field[x, y];
-            field[x, y] = field[x+1, y];
-            field[x+1, y] = value;
-            }
-            if(y<3 && x==3)
-            {
-            string value = field[x, y];
-            field[x, y] = field[x, y+1];
-            field[x, y+1] = value;
-            }
-            }
-            CoordinateX = x;
-            CoordinateY = y;
-        }
+        UP(ref CoordinateY, CoordinateX);
+
+    }
+    for (int i = 0; i < 3; i++)
+    {
+        Left(CoordinateY, ref CoordinateX);
+
+    }
+    for (int i = 0; i < 3; i++)
+    {
+        Down(ref CoordinateY, CoordinateX);
+
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        Right(CoordinateY, ref CoordinateX);
     }
 }
 
-void ShowField()                                                             
+
+for (int i = 0; i < 10; i++)
+{
+    z = random.Next(5);
+    int z1 = random.Next(4);
+    if (z == 1)
+    {
+        for (int q = 0; q < z1; q++)
+        {
+            UP(ref CoordinateY, CoordinateX);
+        }
+    }
+    if (z == 2)
+    {
+        for (int q = 0; q < z1; q++)
+        {
+            Left(CoordinateY, ref CoordinateX);
+        }
+    }
+    if (z == 3)
+    {
+        for (int q = 0; q < z1; q++)
+        {
+            Down(ref CoordinateY, CoordinateX);
+        }
+    }
+    if (z == 4)
+    {
+        for (int q = 0; q < z1; q++)
+        {
+            Right(CoordinateY, ref CoordinateX);
+        }
+    }
+
+}
+
+while(field[3,3] != " " )
+        {
+        Down(ref CoordinateY, CoordinateX);
+        Right(CoordinateY, ref CoordinateX);
+        }
+
+void ShowField()
 {
     Console.WriteLine();
     Console.WriteLine(string.Format("  {0,2:0.0} | {1,2:0.0} | {2,2:0.0} | {3,2:0.0}", field[0, 0], field[0, 1], field[0, 2], field[0, 3]));
@@ -106,7 +126,7 @@ void KeyPressed(ConsoleKeyInfo key, ref string[,] field, ref int CoordinateY, re
                     break;
                 }
                 int x1 = CoordinateX;
-                int y1 = CoordinateY-1;
+                int y1 = CoordinateY - 1;
                 proverka(ref x1, ref y1);
                 CoordinateY = y1;
                 if (CoordinateY > 0)
@@ -124,7 +144,7 @@ void KeyPressed(ConsoleKeyInfo key, ref string[,] field, ref int CoordinateY, re
                     break;
                 }
                 int x1 = CoordinateX;
-                int y1 = CoordinateY+1;
+                int y1 = CoordinateY + 1;
                 proverka(ref x1, ref y1);
                 CoordinateY = y1;
                 if (CoordinateY < 3)
@@ -134,14 +154,14 @@ void KeyPressed(ConsoleKeyInfo key, ref string[,] field, ref int CoordinateY, re
             }
             break;
 
-            case ConsoleKey.LeftArrow:
+        case ConsoleKey.LeftArrow:
             if (CoordinateX >= 0)
             {
                 if (CoordinateX == 0)
                 {
                     break;
                 }
-                int x1 = CoordinateX-1;
+                int x1 = CoordinateX - 1;
                 int y1 = CoordinateY;
                 proverka(ref x1, ref y1);
                 CoordinateY = y1;
@@ -159,7 +179,7 @@ void KeyPressed(ConsoleKeyInfo key, ref string[,] field, ref int CoordinateY, re
                 {
                     break;
                 }
-                int x1 = CoordinateX+1;
+                int x1 = CoordinateX + 1;
                 int y1 = CoordinateY;
                 proverka(ref x1, ref y1);
                 CoordinateY = y1;
@@ -168,14 +188,14 @@ void KeyPressed(ConsoleKeyInfo key, ref string[,] field, ref int CoordinateY, re
                     CoordinateX = x1;
                 }
             }
-            break;       
+            break;
 
     }
 }
 
 bool winner = false;
 
-while (winner==false)
+while (winner == false)
 {
 
 
@@ -191,3 +211,60 @@ while (winner==false)
 
 Console.WriteLine("Конец игры");
 Console.ReadKey();
+
+void UP(ref int CoordinateY, int CoordinateX)
+{
+    if (CoordinateY > 0)
+    {
+        int x1 = CoordinateX;
+        int y1 = CoordinateY - 1;
+        proverka(ref x1, ref y1);
+        CoordinateY = y1;
+        if (CoordinateY > 0)
+        {
+            CoordinateY = y1;
+        }
+    }
+}
+void Down(ref int CoordinateY, int CoordinateX)
+{
+    if (CoordinateY < 3)
+    {
+        int x1 = CoordinateX;
+        int y1 = CoordinateY + 1;
+        proverka(ref x1, ref y1);
+        CoordinateY = y1;
+        if (CoordinateY < 3)
+        {
+            CoordinateY = y1;
+        }
+    }
+}
+void Left(int CoordinateY, ref int CoordinateX)
+{
+    if (CoordinateX > 0)
+    {
+        int x1 = CoordinateX - 1;
+        int y1 = CoordinateY;
+        proverka(ref x1, ref y1);
+        CoordinateY = y1;
+        if (CoordinateY >= 0)
+        {
+            CoordinateX = x1;
+        }
+    }
+}
+void Right(int CoordinateY, ref int CoordinateX)
+{
+    if (CoordinateX < 3)
+    {
+        int x1 = CoordinateX + 1;
+        int y1 = CoordinateY;
+        proverka(ref x1, ref y1);
+        CoordinateY = y1;
+        if (CoordinateX <= 3)
+        {
+            CoordinateX = x1;
+        }
+    }
+}
