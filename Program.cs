@@ -90,6 +90,21 @@ void Right(int CoordinateY, ref int CoordinateX)
     }
 }
 
+void proverka(ref int x1, ref int y1)
+{
+    for (int x = 0; x < 4; x++)
+    {
+        for (int y = 0; y < 4; y++)
+        {
+            if (field[y, x] == " ")
+            {
+                string value = field[y, x];
+                field[y, x] = field[y1, x1];
+                field[y1, x1] = value;
+            }
+        }
+    }
+}
 for (int q = 0; q < z; q++)
 {
 
@@ -192,23 +207,7 @@ while(field[3,3] != " " )
         Right(CoordinateY, ref CoordinateX);
         }
 
-
 ShowField();
-void proverka(ref int x1, ref int y1)
-{
-    for (int x = 0; x < 4; x++)
-    {
-        for (int y = 0; y < 4; y++)
-        {
-            if (field[y, x] == " ")
-            {
-                string value = field[y, x];
-                field[y, x] = field[y1, x1];
-                field[y1, x1] = value;
-            }
-        }
-    }
-}
 
 void KeyPressed(ConsoleKeyInfo key, ref string[,] field, ref int CoordinateY, ref int CoordinateX)
 {
